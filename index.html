@@ -1,0 +1,374 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Agenda da Empresa</title>
+
+    <link rel="stylesheet" href="style.css" />
+  </head>
+
+  <body>
+    <!-- =========================
+         MENU LATERAL
+    ========================== -->
+
+    <aside id="sidebar" class="sidebar">
+      <div class="sidebar-header">
+        <h2>Agenda</h2>
+        <button id="closeMenu">×</button>
+      </div>
+
+      <nav>
+        <button onclick="mostrarPagina('inicio')">🏠 Início</button>
+
+        <button onclick="mostrarPagina('calendario')">📅 Calendário</button>
+
+        <button onclick="mostrarPagina('comunicados')">📢 Comunicados</button>
+
+        <button onclick="mostrarPagina('reunioes')">📋 Reuniões</button>
+
+        <!-- NOTAS -->
+
+        <div class="menu-titulo">📝 NOTAS</div>
+
+        <button onclick="mostrarNotas('Geral')">📝 Notas gerais</button>
+
+        <!-- SETORES -->
+
+        <div class="menu-titulo">🏢 SETORES</div>
+
+        <button onclick="abrirSetor('Equipe diretiva')">
+          👔 Equipe diretiva
+        </button>
+
+        <button onclick="abrirSetor('Logotipo')">🎨 Logotipo</button>
+
+        <button onclick="abrirSetor('Fachada')">🏢 Fachada</button>
+
+        <button onclick="abrirSetor('Planta baixa')">📐 Planta baixa</button>
+
+        <button onclick="abrirSetor('Protótipo da maquete')">
+          🏗️ Protótipo da maquete
+        </button>
+
+        <button onclick="abrirSetor('DP')">👥 DP</button>
+
+        <button onclick="abrirSetor('Marketing')">📣 Marketing</button>
+
+        <button onclick="abrirSetor('Vendas')">🛒 Vendas</button>
+
+        <button onclick="abrirSetor('Fornecedores')">🚚 Fornecedores</button>
+
+        <button onclick="abrirSetor('Manutenção / Almoxarifado')">
+          🔧 Manutenção / Almoxarifado
+        </button>
+
+        <button onclick="abrirSetor('Controle de qualidade')">
+          ✅ Controle de qualidade
+        </button>
+
+        <div class="menu-separador"></div>
+
+        <button class="botao-publicar" onclick="abrirFormulario()">
+          ➕ Novo comunicado
+        </button>
+      </nav>
+    </aside>
+
+    <!-- FUNDO DO MENU -->
+
+    <div id="overlay" class="overlay"></div>
+
+    <!-- =========================
+         CONTEÚDO PRINCIPAL
+    ========================== -->
+
+    <main>
+      <header class="topbar">
+        <button id="menuButton" class="menu-button">☰</button>
+
+        <div>
+          <h1>Agenda da Empresa</h1>
+          <p>Comunicados, reuniões, eventos e notas</p>
+        </div>
+      </header>
+
+      <section id="conteudo">
+        <p
+          id="status-sincronizacao"
+          class="status-conexao"
+          role="status"
+          hidden
+        ></p>
+        <!-- =========================
+                 INÍCIO
+            ========================== -->
+
+        <div id="pagina-inicio">
+          <div class="boas-vindas">
+            <h2>Olá! 👋</h2>
+
+            <p>Confira os comunicados e próximos eventos da empresa.</p>
+          </div>
+
+          <div class="acoes">
+            <button onclick="abrirFormulario()" class="btn-principal">
+              ➕ Novo comunicado
+            </button>
+
+            <button
+              onclick="mostrarPagina('calendario')"
+              class="btn-secundario"
+            >
+              📅 Ver calendário
+            </button>
+          </div>
+
+          <h2 class="titulo-secao">📢 Comunicados recentes</h2>
+
+          <div id="lista-inicio" class="lista-eventos"></div>
+
+          <h2 class="titulo-secao">📅 Próximos eventos</h2>
+
+          <div id="lista-eventos" class="lista-eventos"></div>
+        </div>
+
+        <!-- =========================
+                 CALENDÁRIO
+            ========================== -->
+
+        <div id="pagina-calendario" class="pagina escondida">
+          <div class="cabecalho-pagina">
+            <div>
+              <h2>📅 Calendário</h2>
+
+              <p>Próximos compromissos da empresa.</p>
+            </div>
+
+            <button onclick="abrirFormulario()" class="btn-principal">
+              ➕ Adicionar
+            </button>
+          </div>
+
+          <div id="calendario"></div>
+        </div>
+
+        <!-- =========================
+                 COMUNICADOS
+            ========================== -->
+
+        <div id="pagina-comunicados" class="pagina escondida">
+          <div class="cabecalho-pagina">
+            <div>
+              <h2>📢 Comunicados</h2>
+
+              <p>Informações importantes para a empresa.</p>
+            </div>
+
+            <button onclick="abrirFormulario()" class="btn-principal">
+              ➕ Novo comunicado
+            </button>
+          </div>
+
+          <div id="lista-comunicados" class="lista-eventos"></div>
+        </div>
+
+        <!-- =========================
+                 REUNIÕES
+            ========================== -->
+
+        <div id="pagina-reunioes" class="pagina escondida">
+          <div class="cabecalho-pagina">
+            <div>
+              <h2>📋 Reuniões</h2>
+
+              <p>Reuniões e compromissos agendados.</p>
+            </div>
+
+            <div class="botoes-reuniao">
+              <button onclick="abrirFormularioReuniao()" class="btn-principal">
+                ➕ Nova reunião
+              </button>
+
+              <button onclick="removerReunioesPassadas()" class="btn-perigo">
+                🗑️ Remover reuniões passadas
+              </button>
+            </div>
+          </div>
+
+          <div id="lista-reunioes" class="lista-eventos"></div>
+        </div>
+
+        <!-- =========================
+                 NOTAS
+            ========================== -->
+
+        <div id="pagina-notas" class="pagina escondida">
+          <div class="cabecalho-pagina">
+            <div>
+              <h2 id="titulo-notas">📝 Notas</h2>
+
+              <p>Anotações e lembretes.</p>
+            </div>
+          </div>
+
+          <div class="notas-area">
+            <textarea
+              id="campo-notas"
+              placeholder="Digite suas anotações aqui..."
+            ></textarea>
+
+            <div class="notas-footer">
+              <span id="status-nota"> Alterações não salvas </span>
+
+              <button onclick="salvarNota()" class="btn-principal">
+                💾 Salvar notas
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- =========================
+                 SETOR
+            ========================== -->
+
+        <div id="pagina-setor" class="pagina escondida">
+          <div class="cabecalho-pagina">
+            <div>
+              <h2 id="titulo-setor">🏢 Setor</h2>
+
+              <p>Eventos e informações deste setor.</p>
+            </div>
+
+            <button onclick="abrirFormulario()" class="btn-principal">
+              ➕ Adicionar
+            </button>
+          </div>
+
+          <div class="atalho-notas">
+            <button onclick="abrirNotasDoSetorAtual()" class="btn-notas">
+              📝 Abrir notas deste setor
+            </button>
+          </div>
+
+          <h3 class="titulo-secao">📅 Eventos do setor</h3>
+
+          <div id="lista-setor" class="lista-eventos"></div>
+        </div>
+      </section>
+    </main>
+
+    <!-- =========================
+         MODAL NOVO EVENTO
+    ========================== -->
+
+    <div id="modal" class="modal">
+      <div class="modal-conteudo">
+        <div class="modal-header">
+          <h2 id="titulo-modal">➕ Novo comunicado</h2>
+
+          <button onclick="fecharFormulario()">×</button>
+        </div>
+
+        <form id="formEvento">
+          <label for="autor">Seu nome</label>
+
+          <input
+            type="text"
+            id="autor"
+            placeholder="Ex: Ana"
+            maxlength="80"
+            autocomplete="name"
+            required
+          />
+
+          <label> Título </label>
+
+          <input
+            type="text"
+            id="titulo"
+            placeholder="Ex: Reunião geral"
+            required
+          />
+
+          <label> Tipo </label>
+
+          <select id="tipo">
+            <option value="comunicado">📢 Comunicado</option>
+
+            <option value="reuniao">📋 Reunião</option>
+
+            <option value="evento">📅 Evento</option>
+          </select>
+
+          <label> Data </label>
+
+          <input type="date" id="data" required />
+
+          <label> Horário </label>
+
+          <input type="time" id="hora" />
+
+          <label> Setor </label>
+
+          <select id="setor">
+            <option value="Todos">👥 Toda a empresa</option>
+
+            <option value="Equipe diretiva">👔 Equipe diretiva</option>
+
+            <option value="Logotipo">🎨 Logotipo</option>
+
+            <option value="Fachada">🏢 Fachada</option>
+
+            <option value="Planta baixa">📐 Planta baixa</option>
+
+            <option value="Protótipo da maquete">
+              🏗️ Protótipo da maquete
+            </option>
+
+            <option value="DP">👥 DP</option>
+
+            <option value="Marketing">📣 Marketing</option>
+
+            <option value="Vendas">🛒 Vendas</option>
+
+            <option value="Fornecedores">🚚 Fornecedores</option>
+
+            <option value="Manutenção / Almoxarifado">
+              🔧 Manutenção / Almoxarifado
+            </option>
+
+            <option value="Controle de qualidade">
+              ✅ Controle de qualidade
+            </option>
+          </select>
+
+          <label> Descrição </label>
+
+          <textarea
+            id="descricao"
+            rows="5"
+            placeholder="Digite as informações..."
+            required
+          ></textarea>
+
+          <div class="botoes-formulario">
+            <button
+              type="button"
+              onclick="fecharFormulario()"
+              class="btn-cancelar"
+            >
+              Cancelar
+            </button>
+
+            <button type="submit" class="btn-principal">Publicar</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <script src="supabase-config.js"></script>
+    <script src="script.js"></script>
+  </body>
+</html>
