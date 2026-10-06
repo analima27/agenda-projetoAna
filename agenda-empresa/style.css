@@ -1,0 +1,533 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  background: #f4f6f8;
+  color: #1f2937;
+}
+
+/* =========================
+   MENU LATERAL
+========================= */
+
+.sidebar {
+  position: fixed;
+  left: -300px;
+  top: 0;
+  width: 300px;
+  height: 100vh;
+  background: #ffffff;
+  z-index: 1000;
+  transition: 0.3s;
+  box-shadow: 5px 0 20px rgba(0, 0, 0, 0.1);
+  overflow-y: auto;
+}
+
+.sidebar.ativo {
+  left: 0;
+}
+
+.sidebar-header {
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 25px;
+  border-bottom: 1px solid #eee;
+  position: sticky;
+  top: 0;
+  background: white;
+  z-index: 2;
+}
+
+.sidebar-header h2 {
+  color: #2563eb;
+}
+
+.sidebar-header button {
+  border: none;
+  background: none;
+  font-size: 30px;
+  cursor: pointer;
+}
+
+.sidebar nav {
+  padding: 15px;
+}
+
+.sidebar nav button {
+  width: 100%;
+  text-align: left;
+  border: none;
+  background: transparent;
+  padding: 12px;
+  margin-bottom: 4px;
+  border-radius: 8px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.sidebar nav button:hover {
+  background: #eef4ff;
+  color: #2563eb;
+}
+
+.menu-titulo {
+  font-size: 11px;
+  color: #888;
+  margin: 20px 10px 8px;
+  font-weight: bold;
+}
+
+.menu-separador {
+  height: 1px;
+  background: #eee;
+  margin: 15px 0;
+}
+
+.botao-publicar {
+  background: #2563eb !important;
+  color: white !important;
+  text-align: center !important;
+}
+
+.overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  z-index: 999;
+}
+
+.overlay.ativo {
+  display: block;
+}
+
+/* =========================
+   TOPO
+========================= */
+
+.topbar {
+  background: white;
+  height: 85px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 0 30px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+.menu-button {
+  border: none;
+  background: #2563eb;
+  color: white;
+  font-size: 22px;
+  width: 45px;
+  height: 45px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.topbar h1 {
+  font-size: 22px;
+}
+
+.topbar p {
+  color: #777;
+  font-size: 14px;
+  margin-top: 4px;
+}
+
+/* =========================
+   CONTEÚDO
+========================= */
+
+#conteudo {
+  max-width: 1100px;
+  margin: auto;
+  padding: 35px 20px;
+}
+
+.status-conexao {
+  margin-bottom: 18px;
+  padding: 12px 14px;
+  border-left: 4px solid #d97706;
+  background: #fffbeb;
+  color: #78350f;
+  font-size: 14px;
+}
+
+.boas-vindas {
+  background: linear-gradient(135deg, #2563eb, #1d4ed8);
+  color: white;
+  padding: 30px;
+  border-radius: 15px;
+  margin-bottom: 25px;
+}
+
+.boas-vindas h2 {
+  margin-bottom: 8px;
+}
+
+.acoes {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 35px;
+}
+
+.btn-principal,
+.btn-secundario,
+.btn-cancelar,
+.btn-perigo,
+.btn-notas {
+  border: none;
+  padding: 12px 18px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.btn-principal {
+  background: #2563eb;
+  color: white;
+}
+
+.btn-principal:hover {
+  background: #1d4ed8;
+}
+
+.btn-secundario {
+  background: white;
+  color: #2563eb;
+  border: 1px solid #2563eb;
+}
+
+.btn-cancelar {
+  background: #e5e7eb;
+}
+
+.btn-perigo {
+  background: #fee2e2;
+  color: #b91c1c;
+}
+
+.btn-perigo:hover {
+  background: #fecaca;
+}
+
+.btn-notas {
+  background: #f3e8ff;
+  color: #7e22ce;
+}
+
+.btn-notas:hover {
+  background: #e9d5ff;
+}
+
+.titulo-secao {
+  font-size: 18px;
+  margin: 25px 0 15px;
+}
+
+/* =========================
+   EVENTOS
+========================= */
+
+.lista-eventos {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.evento {
+  background: white;
+  padding: 20px;
+  border-radius: 12px;
+  border-left: 5px solid #2563eb;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.evento-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 15px;
+}
+
+.evento h3 {
+  margin-bottom: 8px;
+}
+
+.evento p {
+  color: #555;
+  line-height: 1.5;
+}
+
+.evento .evento-autor {
+  margin-top: 8px;
+  color: #6b7280;
+  font-size: 13px;
+}
+
+.evento-info {
+  margin-top: 12px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.tag {
+  background: #eef4ff;
+  color: #2563eb;
+  padding: 5px 10px;
+  border-radius: 20px;
+  font-size: 12px;
+}
+
+.sem-eventos {
+  background: white;
+  padding: 30px;
+  text-align: center;
+  border-radius: 12px;
+  color: #777;
+}
+
+.btn-remover-evento {
+  flex-shrink: 0;
+  border: 1px solid #fecaca;
+  border-radius: 6px;
+  background: #fff1f2;
+  color: #b91c1c;
+  padding: 8px 10px;
+  font: inherit;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.btn-remover-evento:hover {
+  background: #fee2e2;
+}
+
+/* =========================
+   PÁGINAS
+========================= */
+
+.pagina {
+  display: block;
+}
+
+.escondida {
+  display: none;
+}
+
+.cabecalho-pagina {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 25px;
+  gap: 15px;
+}
+
+.cabecalho-pagina p {
+  color: #777;
+  margin-top: 5px;
+}
+
+.botoes-reuniao {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+/* =========================
+   NOTAS
+========================= */
+
+.notas-area {
+  background: white;
+  border-radius: 15px;
+  padding: 20px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.notas-area textarea {
+  width: 100%;
+  min-height: 350px;
+  resize: vertical;
+  border: 1px solid #d1d5db;
+  border-radius: 10px;
+  padding: 18px;
+  font-size: 16px;
+  font-family: inherit;
+  line-height: 1.6;
+  outline: none;
+}
+
+.notas-area textarea:focus {
+  border-color: #2563eb;
+}
+
+.notas-footer {
+  margin-top: 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 15px;
+}
+
+#status-nota {
+  color: #777;
+  font-size: 13px;
+}
+
+.atalho-notas {
+  margin-bottom: 25px;
+}
+
+/* =========================
+   MODAL
+========================= */
+
+.modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 2000;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+.modal.ativo {
+  display: flex;
+}
+
+.modal-conteudo {
+  background: white;
+  width: 100%;
+  max-width: 550px;
+  max-height: 90vh;
+  overflow-y: auto;
+  border-radius: 15px;
+  padding: 25px;
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 25px;
+}
+
+.modal-header button {
+  border: none;
+  background: none;
+  font-size: 28px;
+  cursor: pointer;
+}
+
+form label {
+  display: block;
+  margin: 15px 0 7px;
+  font-weight: bold;
+}
+
+form input,
+form select,
+form textarea {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  font-size: 14px;
+  font-family: inherit;
+}
+
+form textarea {
+  resize: vertical;
+}
+
+.botoes-formulario {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 25px;
+}
+
+/* =========================
+   CALENDÁRIO
+========================= */
+
+#calendario {
+  background: white;
+  border-radius: 12px;
+  padding: 20px;
+}
+
+.mes {
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.evento-calendario {
+  padding: 12px;
+  border-left: 4px solid #2563eb;
+  background: #f8fafc;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+}
+
+/* =========================
+   RESPONSIVO
+========================= */
+
+@media (max-width: 700px) {
+  .topbar {
+    padding: 0 15px;
+  }
+
+  .topbar h1 {
+    font-size: 18px;
+  }
+
+  #conteudo {
+    padding: 20px 15px;
+  }
+
+  .acoes {
+    flex-direction: column;
+  }
+
+  .cabecalho-pagina {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .botoes-reuniao {
+    width: 100%;
+    flex-direction: column;
+  }
+
+  .botoes-reuniao button {
+    width: 100%;
+  }
+
+  .evento-header {
+    flex-direction: column;
+  }
+
+  .notas-footer {
+    flex-direction: column;
+    align-items: stretch;
+  }
+}
